@@ -222,6 +222,7 @@ public class LexicaView extends View implements Synchronizer.Event, Game.RotateH
 			int lines = 0;
 			int lenPad = 1;
 			int countPad = 2;
+			float minSize = getResources().getDimension(R.dimen.textSizeMinimum);
 
 			for (int i = 0; i < maxWordCounts.size(); i++) {
 				int count = maxWordCounts.valueAt(i);
@@ -236,12 +237,12 @@ public class LexicaView extends View implements Synchronizer.Event, Game.RotateH
 					}
 				}
 			}
-			float textSize = (bottom - top) / lines;
+			float textSize = (bottom - top) / ((lines == 0) ? minSize : lines);
 			if (textSize > textSizeNormal) {
 				textSize = textSizeNormal;
 			}
-			if (textSize < getResources().getDimension(R.dimen.textSizeMinimum)) {
-				textSize = getResources().getDimension(R.dimen.textSizeMinimum);
+			if (textSize < minSize) {
+				textSize = minSize;
 			}
 			p.setTextSize(textSize);
 			p.setTypeface(Typeface.MONOSPACE);
